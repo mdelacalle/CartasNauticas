@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CartasNauticas.iml" filepath="$PROJECT_DIR$/CartasNauticas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../g3m/Android/G3MAndroidSDK/G3MAndroidSDK.iml" filepath="$PROJECT_DIR$/../../../g3m/Android/G3MAndroidSDK/G3MAndroidSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../g3m/Commons/G3MSharedSDK/G3MSharedSDK.iml" filepath="$PROJECT_DIR$/../../../g3m/Commons/G3MSharedSDK/G3MSharedSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
