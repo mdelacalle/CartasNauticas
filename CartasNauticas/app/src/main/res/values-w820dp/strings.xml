@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aemet">AEMET</string>
+    <string name="select_area">Seleccione la zona costera</string>
+</resources>

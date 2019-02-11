@@ -1,15 +1,19 @@
 <resources>
-    <string name="app_name">IHM Cartas Naúticas</string>
-    <string name="ask_for_location">Si quieres poder usar el GPS con la aplicación, necesitas dar permiso para usarlo.</string>
-    <string name="crear_punto">Crear punto</string>
-    <string name="longitud">Longitud:</string>
-    <string name="latidud">Latidud:</string>
-    <string name="selecciona_el_icono">Selecciona el icono</string>
-    <string name="crear_punto_y_guardar">Crear punto y guardarlo</string>
-    <string name="cancelar">Cancelar</string>
-    <string name="poner_coordenadas">Poner coordenadas</string>
-    <string name="content_description">Imagen</string>
-    <string name="el_punto_se_guardo_correctamente">El punto se ha guardado correctamente.</string>
-    <string name="borrar_punto">Borrar el punto</string>
-    <string name="editar_punto">Editar el punto</string>
+    <string name="app_name">Spanish nautical charts</string>
+    <string name="ask_for_location"> You need to allow the GPS for use this application</string>
+    <string name="crear_punto">Create point</string>
+    <string name="longitud">Longitude:</string>
+    <string name="latidud">Latidude:</string>
+    <string name="selecciona_el_icono">Select the icon</string>
+    <string name="crear_punto_y_guardar">Create and save the point</string>
+    <string name="cancelar">Cancel</string>
+    <string name="poner_coordenadas">Coordinates label</string>
+    <string name="content_description">content description</string>
+    <string name="el_punto_se_guardo_correctamente">The point was saved</string>
+    <string name="borrar_punto">Delete the point</string>
+    <string name="editar_punto">Edit the point</string>
+    <string name="aemet">AEMET</string>
+    <string name="select_area">Seleccione la zona costera</string>
+    <string name="searchin_aemet_API" >Searching last report from AEMET</string>
+    <string name="error_api_aemet_message">Hubo un error consultando la previsión del tiempo y no hay ninguna anterior guardada.</string>
 </resources>

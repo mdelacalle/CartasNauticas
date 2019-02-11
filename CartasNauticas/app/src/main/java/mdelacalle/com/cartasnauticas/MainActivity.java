@@ -2,14 +2,15 @@ package mdelacalle.com.cartasnauticas;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.RelativeLayout;
+import android.view.View;
 import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
@@ -25,7 +26,9 @@ import org.glob3.mobile.generated.Color;
 import org.glob3.mobile.generated.G3MContext;
 import org.glob3.mobile.generated.G3MEventContext;
 import org.glob3.mobile.generated.GInitializationTask;
+import org.glob3.mobile.generated.GLTextureParameterValue;
 import org.glob3.mobile.generated.GTask;
+import org.glob3.mobile.generated.Geodetic2D;
 import org.glob3.mobile.generated.Geodetic3D;
 import org.glob3.mobile.generated.LayerSet;
 import org.glob3.mobile.generated.Mark;
@@ -33,6 +36,7 @@ import org.glob3.mobile.generated.MarkTouchListener;
 import org.glob3.mobile.generated.MarksRenderer;
 import org.glob3.mobile.generated.PeriodicalTask;
 import org.glob3.mobile.generated.SGShape;
+import org.glob3.mobile.generated.SceneJSParserParameters;
 import org.glob3.mobile.generated.Sector;
 import org.glob3.mobile.generated.ShapeLoadListener;
 import org.glob3.mobile.generated.ShapesRenderer;
@@ -58,15 +62,16 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     G3MBuilder_Android _builder;
     G3MWidget_Android _g3mWidget;
-    private RelativeLayout _layout;
+    private ConstraintLayout _layout;
     private LocationManager mLocationManager;
     private Location mLocation;
     private Geodetic3D mPosition = new Geodetic3D(Angle.fromDegrees(0),Angle.fromDegrees(0),0);
     MarksRenderer _weatherMarkers = new MarksRenderer(false);
+    private SGShape mShape;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,24 +138,28 @@ public class MainActivity extends Activity {
 
 
     @SuppressWarnings("unused")
-    private PeriodicalTask testGPS() {
+    private PeriodicalTask startGPS() {
         final PeriodicalTask periodicalTask = new PeriodicalTask(TimeInterval.fromSeconds(5), new GTask() {
 
             @Override
             public void run(final G3MContext context) {
-                Log.d("****", "LOCATION FOUND:"+getLocation().toString());
+
                 if(mLocation!=null) {
 
 //                    mPosition = new Geodetic3D(Angle.fromDegrees(36.5556), Angle.fromDegrees(-6.2544),
 //                            200);
                     mPosition = new Geodetic3D(Angle.fromDegrees(mLocation.getLatitude()), Angle.fromDegrees(mLocation.getLongitude()),
-                            200);
+                            mLocation.getAltitude());
+                    Log.d("****", "Changing the position of the shape FOUND:"+getLocation().toString());
+                    if(mShape!=null) {
+                        mShape.setAnimatedPosition(mPosition);
+                    }
                 }
+
 
             }
         });
         return periodicalTask;
-
     }
 
 
@@ -161,7 +170,7 @@ public class MainActivity extends Activity {
         _builder.setAtmosphere(true);
 
         ArrayList<PeriodicalTask> tasks = new ArrayList<>();
-        tasks.add(testGPS());
+        tasks.add(startGPS());
 
         _builder.setPeriodicalTasks(tasks);
 
@@ -192,12 +201,16 @@ public class MainActivity extends Activity {
         final ShapesRenderer planeShapeRenderer = new ShapesRenderer();
 
 
+        final SceneJSParserParameters p = new SceneJSParserParameters(true, false, GLTextureParameterValue.repeat(),
+                GLTextureParameterValue.repeat());
         planeShapeRenderer.loadJSONSceneJS( //
                 new URL("file:///poi.json", false), //
                 "", //
                 false, // isTransparent
-                true, // depthTest
+                p, // depthTest
                 mPosition, AltitudeMode.ABSOLUTE, new ShapeLoadListener() {
+
+
 
                     @Override
                     public void onBeforeAddShape(final SGShape shape) {
@@ -209,6 +222,7 @@ public class MainActivity extends Activity {
                     @Override
                     public void onAfterAddShape(final SGShape shape) {
 
+                        mShape = shape;
                         shape.setAnimatedPosition(
                                 TimeInterval.fromSeconds(5),
                                 mPosition, true);
@@ -252,7 +266,6 @@ public class MainActivity extends Activity {
                         @Override
                         public boolean touchedMark(Mark mark) {
 
-
                             Log.e("****", "CLICK ON MARK :"+mark.getPosition().toString());
                             MarkerUserData mud = (MarkerUserData) mark.getUserData();
 
@@ -275,6 +288,8 @@ public class MainActivity extends Activity {
                         }
                     };
 
+
+
                     MarkerUserData mud = new MarkerUserData(point.getId(),MainActivity.this);
 
                     _weatherMarkers.addMark(new Mark(
@@ -294,6 +309,8 @@ public class MainActivity extends Activity {
                             false));
                 }
 
+
+
                 isDone = true;
 
             }
@@ -302,8 +319,7 @@ public class MainActivity extends Activity {
 
         _g3mWidget = _builder.createWidget();
 
-        _g3mWidget.setAnimatedCameraPosition(
-                new Geodetic3D(Angle.fromDegrees(39.d),Angle.fromDegrees(-3d), 8000000), TimeInterval.fromSeconds(3));
+
 
         _g3mWidget.getG3MWidget().getPlanetRenderer().addTerrainTouchListener(new TerrainTouchListener() {
             @Override
@@ -333,12 +349,38 @@ public class MainActivity extends Activity {
 
 
 
-        _layout = (RelativeLayout) findViewById(R.id.glob3);
+        _layout = (ConstraintLayout) findViewById(R.id.glob3);
 
-        //_g3mWidget.setCameraPosition(correctedPosition);
-        // _g3mWidget.getG3MWidget().setAnimatedCameraPosition(TimeInterval.fromSeconds(3), correctedPosition, Angle.fromDegrees(0), Angle.fromDegrees(-60D), false);
+
+        goToGPSPosition();
 
         _layout.addView(_g3mWidget);
+
+        findViewById(R.id.gotolocation).bringToFront();
+        findViewById(R.id.gotolocation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToGPSPosition();
+            }
+        });
+
+        findViewById(R.id.aemet_button).bringToFront();
+        findViewById(R.id.aemet_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment previsionCosteraDialogFragment = new PrevisionCosteraDialogFragment();
+                previsionCosteraDialogFragment.setStyle(android.support.v4.app.DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_DayNight_NoActionBar);
+                previsionCosteraDialogFragment.show(getFragmentManager(), "Main Activity");
+            }
+        });
+    }
+
+    private void goToGPSPosition() {
+        mPosition = new Geodetic3D(Angle.fromDegrees(getLocation().getLatitude()), Angle.fromDegrees(getLocation().getLongitude()),
+                mLocation.getAltitude());
+        Geodetic2D mPosition2D = new Geodetic2D(mPosition._latitude.add(Angle.fromDegrees(-0.12)),mPosition._longitude) ;
+        _g3mWidget.getG3MWidget().setAnimatedCameraPosition(TimeInterval.fromSeconds(3),
+                new Geodetic3D(mPosition2D, 12000), Angle.fromDegrees(0),Angle.fromDegrees(-45));
     }
 
 
