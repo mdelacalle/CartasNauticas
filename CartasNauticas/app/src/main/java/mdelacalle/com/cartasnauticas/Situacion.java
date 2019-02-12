@@ -17,6 +17,9 @@ public class Situacion extends RealmObject {
         this.nombre = nombre;
     }
 
+    public Situacion() {
+    }
+
     public String getAnalisis() {
         return analisis;
     }

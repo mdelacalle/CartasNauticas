@@ -2,4 +2,8 @@
 <resources>
     <string name="aemet">AEMET</string>
     <string name="select_area">Seleccione la zona costera</string>
+    <string name="aviso">Aviso</string>
+    <string name="prediccion">Predicción</string>
+    <string name="tendencia">Tendencia</string>
+    <string name="situacion">Situación</string>
 </resources>

@@ -14,7 +14,7 @@
     <color name="grey_dark">#4c4c4c</color>
     <color name="grey_light">#e0dee9</color>
     <color name="grey_lighter">#EFEBE6</color>
-    <color name="grey_border">#cbcbcb</color>
+    <color name="grey_border">#CBCBCB</color>
     <color name="white">#ffffff</color>
     <color name="blue_gradient_start">#003682</color>
     <color name="blue_gradient_end">#041E42</color>
@@ -22,6 +22,6 @@
     <color name="green_gradient_end">#0D867B</color>
     <color name="orange_gradient_start">#FBBC26</color>
     <color name="orange_gradient_end">#fb8c26</color>
-    <color name="red_buttons">#e40028</color>
+    <color name="red_buttons">#E40028</color>
     <color name="green_gr">#58963D</color>
 </resources>

@@ -24,7 +24,7 @@ public class PrevisionCosteraDialogFragment extends DialogFragment {
             }
         });
 
-        ZonasCosterasAdapter zca = new ZonasCosterasAdapter(AemetAPIConstants.getAreasCosteras(),container);
+        ZonasCosterasAdapter zca = new ZonasCosterasAdapter(AemetAPIConstants.getAreasCosteras(),container,getActivity());
         RecyclerView listaAreasCosteras = container.findViewById(R.id.lista_areas);
 
         listaAreasCosteras.setHasFixedSize(true);

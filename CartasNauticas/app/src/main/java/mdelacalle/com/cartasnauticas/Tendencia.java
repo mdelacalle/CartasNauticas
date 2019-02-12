@@ -13,6 +13,9 @@ public class Tendencia extends RealmObject {
         this.texto = texto;
     }
 
+    public Tendencia() {
+    }
+
     public String getInicio() {
         return inicio;
     }

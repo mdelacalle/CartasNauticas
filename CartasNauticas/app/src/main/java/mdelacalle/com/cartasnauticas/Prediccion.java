@@ -14,6 +14,9 @@ public class Prediccion extends RealmObject {
         this.zonas = zonas;
     }
 
+    public Prediccion() {
+    }
+
     public String getInicio() {
         return inicio;
     }

@@ -16,4 +16,8 @@
     <string name="select_area">Seleccione la zona costera</string>
     <string name="searchin_aemet_API" >Searching last report from AEMET</string>
     <string name="error_api_aemet_message">Hubo un error consultando la previsión del tiempo y no hay ninguna anterior guardada.</string>
+    <string name="aviso">Aviso</string>
+    <string name="prediccion">Predicción</string>
+    <string name="tendencia">Tendencia</string>
+    <string name="situacion">Situación</string>
 </resources>

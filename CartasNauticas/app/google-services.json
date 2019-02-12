@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "711568106801",
+    "firebase_url": "https://cartas-nauticas.firebaseio.com",
+    "project_id": "cartas-nauticas",
+    "storage_bucket": "cartas-nauticas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711568106801:android:f63c8fc515ac9f04",
+        "android_client_info": {
+          "package_name": "mdelacalle.com.cartasnauticas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711568106801-78kdj10octu589246pp3ado8uhbsqva0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mdelacalle.com.cartasnauticas",
+            "certificate_hash": "07d935c1f5964ac36d0592a48ac545ea375190f9"
+          }
+        },
+        {
+          "client_id": "711568106801-2gp6t1ib6ugr2hvk383qo5cer9tfloto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-Ew6SBt_Y-h7Sduir3qvMqwJQYANo6uY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711568106801-2gp6t1ib6ugr2hvk383qo5cer9tfloto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

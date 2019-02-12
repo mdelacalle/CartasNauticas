@@ -5,7 +5,7 @@ import io.realm.RealmObject;
 public class PrediccionCosteraArea extends RealmObject {
     String productor;
     String nombre;
-    String area;
+    int area;
     String elaborado;
     String inicio;
     String fin;
@@ -14,6 +14,9 @@ public class PrediccionCosteraArea extends RealmObject {
     Situacion situacion;
     Prediccion prediccion;
     Tendencia tendencia;
+
+    public PrediccionCosteraArea() {
+    }
 
     public String getProductor() {
         return productor;
@@ -31,13 +34,6 @@ public class PrediccionCosteraArea extends RealmObject {
         this.nombre = nombre;
     }
 
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
 
     public String getElaborado() {
         return elaborado;
@@ -91,6 +87,14 @@ public class PrediccionCosteraArea extends RealmObject {
         return prediccion;
     }
 
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
     public void setPrediccion(Prediccion prediccion) {
         this.prediccion = prediccion;
     }
@@ -108,7 +112,7 @@ public class PrediccionCosteraArea extends RealmObject {
         return "PrediccionCosteraArea{" +
                 "productor='" + productor + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", area='" + area + '\'' +
+                ", area=" + area +
                 ", elaborado='" + elaborado + '\'' +
                 ", inicio='" + inicio + '\'' +
                 ", fin='" + fin + '\'' +

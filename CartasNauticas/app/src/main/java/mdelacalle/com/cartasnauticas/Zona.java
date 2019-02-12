@@ -11,6 +11,9 @@ public class Zona extends RealmObject {
         this.nombre = nombre;
     }
 
+    public Zona() {
+    }
+
     public String getTexto() {
         return texto;
     }
